@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import CommentContainer from "./comments/CommentContainer";
 
-class Article extends Component {
+export default class Article extends Component {
   static defaultProps = {};
 
   static propTypes = {
@@ -16,19 +16,13 @@ class Article extends Component {
     onClick: PropTypes.func
   };
 
-  handleOpenCloseCommentsClick = () => {
-
-
-  };
-
   render() {
     const { article, isOpen, onButtonClick } = this.props;
-    const body = isOpen 
-    && <section>
-        {article.text}
-        <h3>creation date: {new Date(article.date).toDateString()}</h3>
-        <CommentContainer comments={article.comments} />
-    </section>;
+    const body = isOpen && <section>
+                              {article.text}
+                              <h3>creation date: {new Date(article.date).toDateString()}</h3>
+                              <CommentContainer comments={article.comments} />
+                          </section>;
     return (
       <div>
         <h2>
@@ -40,5 +34,3 @@ class Article extends Component {
     );
   }
 }
-
-export default Article;

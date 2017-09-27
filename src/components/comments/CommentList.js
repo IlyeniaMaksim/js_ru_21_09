@@ -3,6 +3,15 @@ import PropTypes from "prop-types";
 import Comment from "./Comment";
 
 export default class CommentContainer extends Component {
+
+  static propTypes = {
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      user: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    }))
+  };
+
   render() {
     let { comments } = this.props;
     let commentsList = comments.map(comment => {
@@ -20,3 +29,7 @@ export default class CommentContainer extends Component {
     );
   }
 }
+
+CommentContainer.defaultProps = {
+  comments: []
+};

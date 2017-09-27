@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Article from "./Article";
 
-class ArticleList extends Component {
+export default class ArticleList extends Component {
   constructor(props) {
     super(props);
 
@@ -46,5 +46,3 @@ ArticleList.defaultProps = {
 ArticleList.propTypes = {
   articles: PropTypes.array.isRequired
 };
-
-export default ArticleList;

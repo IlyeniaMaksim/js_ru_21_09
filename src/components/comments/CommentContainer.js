@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 import CommentList from "./CommentList";
 
 export default class CommentContainer extends Component {
+  static propTypes = {
+    comments: PropTypes.array,
+    comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        user: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired
+      })
+    )
+  };
+
   constructor(props) {
     super(props);
 
@@ -11,7 +22,7 @@ export default class CommentContainer extends Component {
     };
   }
 
-  handleOpenCloseCommentsClick=()=>{
+  handleOpenCloseCommentsClick = () => {
     this.setState((prevState, props) => {
       return {
         isOpen: !prevState.isOpen
@@ -21,8 +32,11 @@ export default class CommentContainer extends Component {
 
   render() {
     let { comments } = this.props;
-    let commentList = this.state.isOpen && !!comments && comments.length > 0 ? <CommentList comments={comments} /> : null;
-    
+    let commentList =
+      this.state.isOpen && !!comments && comments.length > 0 
+                      ? (<CommentList comments={comments} />) 
+                      : null;
+
     return (
       <div>
         Comments
