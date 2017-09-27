@@ -1,40 +1,50 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import Article from './Article'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Article from "./Article";
 
 class ArticleList extends Component {
-    state = {
-        openArticleId: null
-    }
+  constructor(props) {
+    super(props);
 
-    render() {
-        const {articles} = this.props
-        if (!articles.length) return <h3>No Articles</h3>
-        const articleElements = articles.map((article) => <li key={article.id}>
-            <Article article={article}
-                     isOpen={article.id === this.state.openArticleId}
-                     onButtonClick={this.toggleArticle(article.id)}
-            />
-        </li>)
-        return (
-            <ul>
-                {articleElements}
-            </ul>
-        )
-    }
+    this.state = {
+      openArticleId: null
+    };
+  }
 
-    toggleArticle = (openArticleId) => (ev) => {
-        this.setState({openArticleId})
-    }
+  render() {
+    const { articles } = this.props;
+
+    if (!articles.length) return <h3>No Articles</h3>;
+
+    const articleElements = articles.map( article => (
+      <li key={article.id}>
+        <Article
+          article={article}
+          isOpen={article.id === this.state.openArticleId}
+          onButtonClick={this.toggleArticle(article.id)}
+          comments={article.comments}
+        />
+        <hr />
+      </li>
+    ));
+    return <ul>{articleElements}</ul>;
+  }
+
+  toggleArticle = openArticleId => ev => {
+    this.setState((prevState, props) => {
+      return {
+        openArticleId: prevState.openArticleId != null ? null : openArticleId
+      };
+    });
+  };
 }
-
 
 ArticleList.defaultProps = {
-    articles: []
-}
+  articles: []
+};
 
 ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
-}
+  articles: PropTypes.array.isRequired
+};
 
-export default ArticleList
+export default ArticleList;
