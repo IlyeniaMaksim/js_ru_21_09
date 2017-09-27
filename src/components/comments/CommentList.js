@@ -17,7 +17,7 @@ export default class CommentContainer extends Component {
     let commentsList = comments.map(comment => {
       return (
         <li>
-          <Comment comment={comment} />
+          <Comment key={comment.id} comment={comment} />
         </li>
       );
     });

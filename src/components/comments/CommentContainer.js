@@ -32,6 +32,7 @@ export default class CommentContainer extends Component {
 
   render() {
     let { comments } = this.props;
+    // TODO: для "CommentList" нет уникального ключа, нет индекса, нет уникального свойства. какие есть варианты?
     let commentList =
       this.state.isOpen && !!comments && comments.length > 0 
                       ? (<CommentList comments={comments} />) 
